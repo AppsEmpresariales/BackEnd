@@ -3,11 +3,10 @@ package com.docucloud.persistence.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+// FlujoTrabajoPasoEntity — objetivoEstado como FK
 @Entity
 @Table(name = "flujos_trabajo_pasos")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Data @NoArgsConstructor @AllArgsConstructor
 public class FlujoTrabajoPasoEntity {
 
     @Id
@@ -15,7 +14,6 @@ public class FlujoTrabajoPasoEntity {
     private Long id;
 
     private String nombre;
-
     private String descripcion;
 
     @Column(name = "orden_paso")
@@ -29,6 +27,7 @@ public class FlujoTrabajoPasoEntity {
     @JoinColumn(name = "rol_requerido_id")
     private RolEntity rolRequerido;
 
-    @Column(name = "objetivo_estado_id")
-    private String objetivoEstado; // del documento
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "objetivo_estado_id") // FK real al catálogo
+    private EstadoDocumentoEntity objetivoEstado;
 }
