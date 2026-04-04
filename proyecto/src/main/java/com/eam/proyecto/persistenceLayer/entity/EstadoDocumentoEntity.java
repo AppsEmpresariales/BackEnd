@@ -2,10 +2,9 @@ package com.docucloud.persistence.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "estados_documento")
+@Table(name = "estado_documento")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,27 +14,15 @@ public class EstadoDocumentoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "documento_id")
-    private DocumentoEntity documento;
+    private String nombre;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuario_id")
-    private UsuarioEntity usuario;
+    @Column(name = "es_final")
+    private Boolean esFinal;
 
-    @Enumerated(EnumType.STRING)
-    private AccionDocumentoEnum accion;
+    @Column(name = "es_inicial")
+    private Boolean esInicial;
 
-    private String descripcion;
-
-    @Column(name = "estado_previo")
-    private String estadoPrevio;
-
-    @Column(name = "estado_nuevo")
-    private String estadoNuevo;
-
-    @Column(name = "creado_en")
-    private LocalDateTime creadoEn;
+    private String color;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "organization_id")
