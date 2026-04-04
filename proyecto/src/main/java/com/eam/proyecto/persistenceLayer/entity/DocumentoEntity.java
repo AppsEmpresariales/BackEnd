@@ -4,11 +4,10 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
 
+// DocumentoEntity — estado como FK real
 @Entity
 @Table(name = "documentos")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Data @NoArgsConstructor @AllArgsConstructor
 public class DocumentoEntity {
 
     @Id
@@ -16,9 +15,7 @@ public class DocumentoEntity {
     private Long id;
 
     private String titulo;
-
     private String descripcion;
-
     private Integer version;
 
     @Column(name = "archivo_nombre")
@@ -27,8 +24,8 @@ public class DocumentoEntity {
     @Column(name = "archivo_ruta")
     private String archivoRuta;
 
-    @Column(name = "tamaño_archivo")
-    private Long tamañoArchivo;
+    @Column(name = "tamanio_archivo")
+    private Long tamanioArchivo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "creado_por")
@@ -39,12 +36,16 @@ public class DocumentoEntity {
     private OrganizacionEntity organizacion;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "documento_tipo_id")
+    @JoinColumn(name = "tipo_documento_id")
     private TipoDocumentoEntity tipoDocumento;
 
-    @Enumerated(EnumType.STRING)
-    private EstadoDocumentoEnum estado;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "estado_documento_id") // FK real, no Enum
+    private EstadoDocumentoEntity estadoDocumento;
 
     @Column(name = "creado_en")
     private LocalDateTime creadoEn;
+
+    @Column(name = "actualizado_en")
+    private LocalDateTime actualizadoEn;
 }

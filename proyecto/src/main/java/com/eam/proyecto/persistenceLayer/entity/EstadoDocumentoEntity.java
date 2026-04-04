@@ -3,11 +3,10 @@ package com.docucloud.persistence.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+// EstadoDocumentoEntity — catálogo real de estados
 @Entity
-@Table(name = "estado_documento")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Table(name = "estados_documento")
+@Data @NoArgsConstructor @AllArgsConstructor
 public class EstadoDocumentoEntity {
 
     @Id
@@ -15,14 +14,13 @@ public class EstadoDocumentoEntity {
     private Long id;
 
     private String nombre;
-
-    @Column(name = "es_final")
-    private Boolean esFinal;
+    private String color;
 
     @Column(name = "es_inicial")
     private Boolean esInicial;
 
-    private String color;
+    @Column(name = "es_final")
+    private Boolean esFinal;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "organization_id")

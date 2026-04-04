@@ -4,18 +4,16 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
 
+// UsuarioEntity
 @Entity
 @Table(name = "usuarios")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Data @NoArgsConstructor @AllArgsConstructor
 public class UsuarioEntity {
 
     @Id
     private Long cedula;
 
     private String nombre;
-
     private String email;
 
     @Column(name = "password_hash")

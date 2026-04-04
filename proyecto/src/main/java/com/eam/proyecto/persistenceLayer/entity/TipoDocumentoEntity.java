@@ -4,11 +4,10 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
 
+// TipoDocumentoEntity
 @Entity
 @Table(name = "tipos_documento")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Data @NoArgsConstructor @AllArgsConstructor
 public class TipoDocumentoEntity {
 
     @Id
@@ -16,9 +15,7 @@ public class TipoDocumentoEntity {
     private Long id;
 
     private String nombre;
-
     private String descripcion;
-
     private Boolean active;
 
     @ManyToOne(fetch = FetchType.LAZY)

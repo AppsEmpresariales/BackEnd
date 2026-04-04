@@ -4,11 +4,10 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
 
+// FlujoTrabajoTareaEntity — sin organization_id
 @Entity
 @Table(name = "flujos_trabajo_tareas")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Data @NoArgsConstructor @AllArgsConstructor
 public class FlujoTrabajoTareaEntity {
 
     @Id
@@ -32,16 +31,13 @@ public class FlujoTrabajoTareaEntity {
 
     private String comentario;
 
+    @Column(name = "fecha_limite")
+    private LocalDateTime fechaLimite;
+
     @Column(name = "creado_en")
     private LocalDateTime creadoEn;
 
     @Column(name = "completado_en")
     private LocalDateTime completadoEn;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "organization_id")
-    private OrganizacionEntity organizacion;
-
-    @Column(name = "fecha_limite")
-    private LocalDateTime fechaLimite;
+    // organization_id eliminado: no existe en el DDL
 }

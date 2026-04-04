@@ -4,11 +4,10 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
 
+// NotificacionEntity — esta_leida corregido
 @Entity
 @Table(name = "notificaciones")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Data @NoArgsConstructor @AllArgsConstructor
 public class NotificacionEntity {
 
     @Id
@@ -33,7 +32,8 @@ public class NotificacionEntity {
     @Column(columnDefinition = "TEXT")
     private String mensaje;
 
-    private Boolean leido;
+    @Column(name = "esta_leida") // era "leido"
+    private Boolean estaLeida;
 
     @Column(name = "enviada_a")
     private LocalDateTime enviadaA;

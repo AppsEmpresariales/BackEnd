@@ -3,11 +3,10 @@ package com.docucloud.persistence.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+// PlantillaCorreoEntity
 @Entity
 @Table(name = "plantillas_correo")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Data @NoArgsConstructor @AllArgsConstructor
 public class PlantillaCorreoEntity {
 
     @Id
@@ -15,7 +14,6 @@ public class PlantillaCorreoEntity {
     private Long id;
 
     private String nombre;
-
     private String asunto;
 
     @Column(columnDefinition = "TEXT")
