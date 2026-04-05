@@ -9,6 +9,8 @@ import java.util.List;
 /**
  * Mapper para conversiones entre RolEntity y DTOs usando MapStruct.
  *
+ *
+ *
  * NOTA DE DISEÑO:
  * - RolEntity es un catálogo simple (id, nombre, descripcion).
  * - Los roles del sistema son ADMIN_ORG y USER_ESTANDAR (US-005).
