@@ -1,20 +1,9 @@
-package com.docucloud.businessLayer.dto;
+package com.eam.proyecto.businessLayer.dto;
 
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
-/**
- * DTO de actualización para UsuarioEntity.
- * Todos los campos son opcionales (actualización parcial PATCH).
- *
- * CAMPOS NO ACTUALIZABLES (ignorados por el mapper):
- * - cedula: PK natural inmutable.
- * - organizacion: el usuario no cambia de tenant.
- * - passwordHash: se actualiza por endpoint dedicado de cambio de contraseña.
- * - creadoEn / actualizadoEn: gestionados por JPA.
- *
- * US-013 / US-014
- */
+/** US-013 / US-014 */
 @Data
 public class UsuarioUpdateDTO {
 
@@ -25,6 +14,12 @@ public class UsuarioUpdateDTO {
     @Size(max = 150)
     private String email;
 
-    /** Activar / inactivar la cuenta del usuario (US-014). */
     private Boolean active;
+
+    /** Contraseña en texto plano — el service la encripta con BCrypt antes de persistir */
+    @Size(min = 8, message = "La contraseña debe tener al menos 8 caracteres")
+    private String password;
+
+    /** Hash resultante — asignado por el service, no por el cliente */
+    private String passwordHash;
 }

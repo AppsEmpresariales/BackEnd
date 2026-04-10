@@ -1,12 +1,12 @@
-package com.docucloud.persistence.dao;
+package com.eam.proyecto.persistenceLayer.dao;
 
-import com.docucloud.businessLayer.dto.RolUsuarioAsignarDTO;
-import com.docucloud.businessLayer.dto.RolUsuarioDTO;
-import com.docucloud.businessLayer.mapper.RolUsuarioMapper;
-import com.docucloud.persistence.entity.RolEntity;
-import com.docucloud.persistence.entity.RolUsuarioEntity;
-import com.docucloud.persistence.entity.UsuarioEntity;
-import com.docucloud.persistence.repository.RolUsuarioRepository;
+import com.eam.proyecto.businessLayer.dto.RolUsuarioAsignarDTO;
+import com.eam.proyecto.businessLayer.dto.RolUsuarioDTO;
+import com.eam.proyecto.persistenceLayer.mapper.RolUsuarioMapper;
+import com.eam.proyecto.persistenceLayer.entity.RolEntity;
+import com.eam.proyecto.persistenceLayer.entity.RolUsuarioEntity;
+import com.eam.proyecto.persistenceLayer.entity.UsuarioEntity;
+import com.eam.proyecto.persistenceLayer.repository.RolUsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

@@ -1,13 +1,13 @@
-package com.docucloud.persistence.dao;
+package com.eam.proyecto.persistenceLayer.dao;
 
-import com.docucloud.businessLayer.dto.NotificacionCreateDTO;
-import com.docucloud.businessLayer.dto.NotificacionDTO;
-import com.docucloud.businessLayer.mapper.NotificacionMapper;
-import com.docucloud.persistence.entity.DocumentoEntity;
-import com.docucloud.persistence.entity.NotificacionEntity;
-import com.docucloud.persistence.entity.UsuarioEntity;
-import com.docucloud.persistence.enums.CanalNotificacionEnum;
-import com.docucloud.persistence.repository.NotificacionRepository;
+import com.eam.proyecto.businessLayer.dto.NotificacionCreateDTO;
+import com.eam.proyecto.businessLayer.dto.NotificacionDTO;
+import com.eam.proyecto.persistenceLayer.mapper.NotificacionMapper;
+import com.eam.proyecto.persistenceLayer.entity.DocumentoEntity;
+import com.eam.proyecto.persistenceLayer.entity.NotificacionEntity;
+import com.eam.proyecto.persistenceLayer.entity.UsuarioEntity;
+import com.eam.proyecto.persistenceLayer.entity.enums.CanalNotificacionEnum;
+import com.eam.proyecto.persistenceLayer.repository.NotificacionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

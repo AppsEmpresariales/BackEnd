@@ -1,7 +1,7 @@
-package com.docucloud.businessLayer.mapper;
+package com.eam.proyecto.persistenceLayer.mapper;
 
-import com.docucloud.businessLayer.dto.RolDTO;
-import com.docucloud.persistence.entity.RolEntity;
+import com.eam.proyecto.businessLayer.dto.RolDTO;
+import com.eam.proyecto.persistenceLayer.entity.RolEntity;
 import org.mapstruct.*;
 
 import java.util.List;

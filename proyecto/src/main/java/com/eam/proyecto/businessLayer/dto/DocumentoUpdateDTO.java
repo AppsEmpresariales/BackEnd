@@ -1,4 +1,4 @@
-package com.docucloud.businessLayer.dto;
+package com.eam.proyecto.businessLayer.dto;
 
 import jakarta.validation.constraints.*;
 import lombok.Data;

@@ -1,50 +1,30 @@
-package com.docucloud.persistence.entity;
+package com.eam.proyecto.persistenceLayer.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
 
-// DocumentoEntity — estado como FK real
 @Entity
-@Table(name = "documentos")
-@Data @NoArgsConstructor @AllArgsConstructor
-public class DocumentoEntity {
+@Table(name = "flujos_trabajo")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class FlujoTrabajoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String titulo;
+    private String nombre;
+
     private String descripcion;
-    private Integer version;
 
-    @Column(name = "archivo_nombre")
-    private String archivoNombre;
-
-    @Column(name = "archivo_ruta")
-    private String archivoRuta;
-
-    @Column(name = "tamanio_archivo")
-    private Long tamanioArchivo;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "creado_por")
-    private UsuarioEntity creadoPor;
+    private Boolean active;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "organization_id")
     private OrganizacionEntity organizacion;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tipo_documento_id")
+    @JoinColumn(name = "documento_tipo_id")
     private TipoDocumentoEntity tipoDocumento;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "estado_documento_id") // FK real, no Enum
-    private EstadoDocumentoEntity estadoDocumento;
-
-    @Column(name = "creado_en")
-    private LocalDateTime creadoEn;
-
-    @Column(name = "actualizado_en")
-    private LocalDateTime actualizadoEn;
 }

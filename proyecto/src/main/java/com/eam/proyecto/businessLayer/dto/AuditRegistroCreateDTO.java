@@ -1,6 +1,7 @@
-package com.docucloud.businessLayer.dto;
+package com.eam.proyecto.businessLayer.dto;
 
 import jakarta.validation.constraints.*;
+import java.time.LocalDateTime;
 import lombok.Data;
 
 /**
@@ -34,4 +35,8 @@ public class AuditRegistroCreateDTO {
 
     @Size(max = 100)
     private String estadoNuevo;
+
+    private LocalDateTime creadoEn;
+
+
 }

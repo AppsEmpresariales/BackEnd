@@ -1,4 +1,4 @@
-package com.docucloud.persistence.enums;
+package com.eam.proyecto.persistenceLayer.entity.enums;
 
 public enum AccionDocumentoEnum {
     DOCUMENTO_CREADO,

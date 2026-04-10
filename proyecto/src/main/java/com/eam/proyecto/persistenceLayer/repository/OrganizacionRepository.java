@@ -1,6 +1,6 @@
-package com.docucloud.persistence.repository;
+package com.eam.proyecto.persistenceLayer.repository;
 
-import com.docucloud.persistence.entity.OrganizacionEntity;
+import com.eam.proyecto.persistenceLayer.entity.OrganizacionEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
