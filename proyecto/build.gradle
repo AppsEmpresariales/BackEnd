@@ -34,6 +34,22 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa-test'
 	testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	// JUnit 5 (incluido en spring-boot-starter-test)
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// Mockito (incluido en spring-boot-starter-test)
+	testImplementation 'org.mockito:mockito-core'
+	testImplementation 'org.mockito:mockito-junit-jupiter'
+
+	// AssertJ para assertions fluidas
+	testImplementation 'org.assertj:assertj-core'
+
+
+}
+
+test {
+	useJUnitPlatform() // Requerido para JUnit 5
 }
 
 tasks.named('test') {
