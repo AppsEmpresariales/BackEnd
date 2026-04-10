@@ -1,5 +1,6 @@
-package com.docucloud.persistence.entity;
+package com.eam.proyecto.persistenceLayer.entity;
 
+import com.eam.proyecto.persistenceLayer.entity.enums.TipoEventoEnum;
 import jakarta.persistence.*;
 import lombok.*;
 

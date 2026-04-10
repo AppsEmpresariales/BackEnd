@@ -1,21 +1,10 @@
-package com.docucloud.businessLayer.dto;
+package com.eam.proyecto.businessLayer.dto;
 
 import jakarta.validation.constraints.*;
 import lombok.Data;
+import java.time.LocalDateTime;
 
-/**
- * DTO de creación para DocumentoEntity.
- *
- * CAMPOS OMITIDOS (los gestiona el service o JPA):
- * - id: autogenerado.
- * - version: el service lo inicializa en 1.
- * - creadoEn / actualizadoEn: gestionados por JPA.
- * - archivoNombre / archivoRuta / tamanioArchivo: se asignan en un paso
- *   separado al subir el archivo (US-018).
- * - estadoDocumentoId: el service asigna el estado inicial de la organización.
- *
- * US-017 / US-027
- */
+/** US-017 / US-027 */
 @Data
 public class DocumentoCreateDTO {
 
@@ -32,13 +21,13 @@ public class DocumentoCreateDTO {
     @NotNull(message = "El NIT de la organización es obligatorio")
     private Long organizacionNit;
 
-    /** Tipo documental asociado al documento (US-027). */
     @NotNull(message = "El tipo de documento es obligatorio")
     private Long tipoDocumentoId;
 
-    /**
-     * Estado inicial explícito (opcional).
-     * Si es null, el service asigna el estado inicial de la organización.
-     */
     private Long estadoDocumentoId;
+
+    // Gestionados por el service antes de persistir
+    private Integer version;
+    private LocalDateTime creadoEn;
+    private LocalDateTime actualizadoEn;
 }

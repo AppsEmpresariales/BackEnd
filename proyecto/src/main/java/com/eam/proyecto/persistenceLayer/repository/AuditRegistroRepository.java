@@ -1,8 +1,8 @@
-package com.docucloud.persistence.repository;
+package com.eam.proyecto.persistenceLayer.repository;
 
-import com.docucloud.persistence.entity.AuditRegistroEntity;
-import com.docucloud.persistence.entity.DocumentoEntity;
-import com.docucloud.persistence.entity.UsuarioEntity;
+import com.eam.proyecto.persistenceLayer.entity.AuditRegistroEntity;
+import com.eam.proyecto.persistenceLayer.entity.DocumentoEntity;
+import com.eam.proyecto.persistenceLayer.entity.UsuarioEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

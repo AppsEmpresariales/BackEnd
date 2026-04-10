@@ -1,18 +1,9 @@
-package com.docucloud.businessLayer.dto;
+package com.eam.proyecto.businessLayer.dto;
 
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
-/**
- * DTO de creación para TipoDocumentoEntity.
- *
- * CAMPOS OMITIDOS (los gestiona el service o JPA):
- * - id: autogenerado.
- * - active: se establece en true al crear (US-024).
- * - creadoEn: gestionado por JPA.
- *
- * US-024 / US-042
- */
+/** US-024 / US-042 */
 @Data
 public class TipoDocumentoCreateDTO {
 
@@ -25,4 +16,7 @@ public class TipoDocumentoCreateDTO {
 
     @NotNull(message = "El NIT de la organización es obligatorio")
     private Long organizacionNit;
+
+    // Gestionado por el service antes de persistir
+    private Boolean active;
 }

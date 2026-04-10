@@ -1,21 +1,11 @@
-package com.docucloud.businessLayer.dto;
+package com.eam.proyecto.businessLayer.dto;
 
+import com.eam.proyecto.persistenceLayer.entity.enums.EstadoTareaEnum;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 import java.time.LocalDateTime;
 
-/**
- * DTO de creación para FlujoTrabajoTareaEntity.
- * Usado al asignar una tarea de revisión a un usuario dentro del flujo.
- *
- * CAMPOS OMITIDOS (los gestiona el service):
- * - id: autogenerado.
- * - estado: el service lo inicializa en PENDIENTE (US-029).
- * - creadoEn: asignado con LocalDateTime.now().
- * - completadoEn: null hasta que se complete la tarea.
- *
- * US-029
- */
+/** US-029 */
 @Data
 public class FlujoTrabajoTareaCreateDTO {
 
@@ -29,7 +19,9 @@ public class FlujoTrabajoTareaCreateDTO {
     private Long asignadoACedula;
 
     private String comentario;
-
-    /** Fecha límite para completar la tarea (US-039 — alertas de vencimiento). */
     private LocalDateTime fechaLimite;
+
+    // Gestionados por el service antes de persistir
+    private EstadoTareaEnum estado;
+    private LocalDateTime creadoEn;
 }

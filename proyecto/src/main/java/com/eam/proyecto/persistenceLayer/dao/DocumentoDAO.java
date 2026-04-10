@@ -1,11 +1,11 @@
-package com.docucloud.persistence.dao;
+package com.eam.proyecto.persistenceLayer.dao;
 
-import com.docucloud.businessLayer.dto.DocumentoCreateDTO;
-import com.docucloud.businessLayer.dto.DocumentoDTO;
-import com.docucloud.businessLayer.dto.DocumentoUpdateDTO;
-import com.docucloud.businessLayer.mapper.DocumentoMapper;
-import com.docucloud.persistence.entity.*;
-import com.docucloud.persistence.repository.DocumentoRepository;
+import com.eam.proyecto.businessLayer.dto.DocumentoCreateDTO;
+import com.eam.proyecto.businessLayer.dto.DocumentoDTO;
+import com.eam.proyecto.businessLayer.dto.DocumentoUpdateDTO;
+import com.eam.proyecto.persistenceLayer.mapper.DocumentoMapper;
+import com.eam.proyecto.persistenceLayer.entity.*;
+import com.eam.proyecto.persistenceLayer.repository.DocumentoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

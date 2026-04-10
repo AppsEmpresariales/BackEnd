@@ -1,13 +1,13 @@
-package com.docucloud.persistence.dao;
+package com.eam.proyecto.persistenceLayer.dao;
 
-import com.docucloud.businessLayer.dto.PlantillaCorreoCreateDTO;
-import com.docucloud.businessLayer.dto.PlantillaCorreoDTO;
-import com.docucloud.businessLayer.dto.PlantillaCorreoUpdateDTO;
-import com.docucloud.businessLayer.mapper.PlantillaCorreoMapper;
-import com.docucloud.persistence.entity.OrganizacionEntity;
-import com.docucloud.persistence.entity.PlantillaCorreoEntity;
-import com.docucloud.persistence.enums.TipoEventoEnum;
-import com.docucloud.persistence.repository.PlantillaCorreoRepository;
+import com.eam.proyecto.businessLayer.dto.PlantillaCorreoCreateDTO;
+import com.eam.proyecto.businessLayer.dto.PlantillaCorreoDTO;
+import com.eam.proyecto.businessLayer.dto.PlantillaCorreoUpdateDTO;
+import com.eam.proyecto.persistenceLayer.mapper.PlantillaCorreoMapper;
+import com.eam.proyecto.persistenceLayer.entity.OrganizacionEntity;
+import com.eam.proyecto.persistenceLayer.entity.PlantillaCorreoEntity;
+import com.eam.proyecto.persistenceLayer.entity.enums.TipoEventoEnum;
+import com.eam.proyecto.persistenceLayer.repository.PlantillaCorreoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

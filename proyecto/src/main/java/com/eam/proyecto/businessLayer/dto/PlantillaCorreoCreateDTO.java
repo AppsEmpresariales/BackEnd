@@ -1,21 +1,10 @@
-package com.docucloud.businessLayer.dto;
+package com.eam.proyecto.businessLayer.dto;
 
-import com.docucloud.persistence.enums.TipoEventoEnum;
+import com.eam.proyecto.persistenceLayer.entity.enums.TipoEventoEnum;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
-/**
- * DTO de creación para PlantillaCorreoEntity.
- *
- * CAMPOS OMITIDOS (los gestiona el service):
- * - id: autogenerado.
- * - activo: se inicializa en true al crear (US-040).
- *
- * REGLA DE NEGOCIO (validada en el service):
- * - Solo puede existir una plantilla activa por tipoEvento por organización (US-043).
- *
- * US-040 / US-043
- */
+/** US-040 / US-043 */
 @Data
 public class PlantillaCorreoCreateDTO {
 
@@ -35,4 +24,7 @@ public class PlantillaCorreoCreateDTO {
 
     @NotNull(message = "El NIT de la organización es obligatorio")
     private Long organizacionNit;
+
+    // Gestionado por el service antes de persistir
+    private Boolean activo;
 }

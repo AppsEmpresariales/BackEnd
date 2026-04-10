@@ -1,18 +1,10 @@
-package com.docucloud.businessLayer.dto;
+package com.eam.proyecto.businessLayer.dto;
 
 import jakarta.validation.constraints.*;
 import lombok.Data;
+import java.time.LocalDateTime;
 
-/**
- * DTO de creación para OrganizacionEntity.
- * Usado en el registro inicial de una organización / tenant.
- *
- * CAMPOS OMITIDOS (los gestiona el service):
- * - active: se establece en true al crear (US-001 → estado ACTIVO).
- * - creadoEn: asignado por el service antes de persistir.
- *
- * US-001 / US-008
- */
+/** US-001 / US-008 */
 @Data
 public class OrganizacionCreateDTO {
 
@@ -39,4 +31,8 @@ public class OrganizacionCreateDTO {
 
     @Size(max = 100)
     private String dirComuna;
+
+    // Gestionados por el service antes de persistir
+    private Boolean active;
+    private LocalDateTime creadoEn;
 }

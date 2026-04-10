@@ -1,10 +1,10 @@
-package com.docucloud.businessLayer.mapper;
+package com.eam.proyecto.persistenceLayer.mapper;
 
-import com.docucloud.businessLayer.dto.UsuarioCreateDTO;
-import com.docucloud.businessLayer.dto.UsuarioDTO;
-import com.docucloud.businessLayer.dto.UsuarioUpdateDTO;
-import com.docucloud.persistence.entity.OrganizacionEntity;
-import com.docucloud.persistence.entity.UsuarioEntity;
+import com.eam.proyecto.businessLayer.dto.UsuarioCreateDTO;
+import com.eam.proyecto.businessLayer.dto.UsuarioDTO;
+import com.eam.proyecto.businessLayer.dto.UsuarioUpdateDTO;
+import com.eam.proyecto.persistenceLayer.entity.OrganizacionEntity;
+import com.eam.proyecto.persistenceLayer.entity.UsuarioEntity;
 import org.mapstruct.*;
 
 import java.util.List;

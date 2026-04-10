@@ -1,10 +1,10 @@
-package com.docucloud.businessLayer.mapper;
+package com.eam.proyecto.persistenceLayer.mapper;
 
-import com.docucloud.businessLayer.dto.PlantillaCorreoCreateDTO;
-import com.docucloud.businessLayer.dto.PlantillaCorreoDTO;
-import com.docucloud.businessLayer.dto.PlantillaCorreoUpdateDTO;
-import com.docucloud.persistence.entity.OrganizacionEntity;
-import com.docucloud.persistence.entity.PlantillaCorreoEntity;
+import com.eam.proyecto.businessLayer.dto.PlantillaCorreoCreateDTO;
+import com.eam.proyecto.businessLayer.dto.PlantillaCorreoDTO;
+import com.eam.proyecto.businessLayer.dto.PlantillaCorreoUpdateDTO;
+import com.eam.proyecto.persistenceLayer.entity.OrganizacionEntity;
+import com.eam.proyecto.persistenceLayer.entity.PlantillaCorreoEntity;
 import org.mapstruct.*;
 
 import java.util.List;

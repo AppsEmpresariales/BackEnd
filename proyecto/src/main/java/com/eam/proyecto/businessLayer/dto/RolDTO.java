@@ -20,6 +20,3 @@ public class RolDTO {
     @Schema(description = "Descripción del rol", example = "Administrador de la organización")
     private String descripcion;
 }
-
-rolAdmin = new RolDTO(1L, "ADMIN_ORG", "Administrador de la organización");
-rolUser  = new RolDTO(2L, "USER_ESTANDAR", "Usuario estándar");
