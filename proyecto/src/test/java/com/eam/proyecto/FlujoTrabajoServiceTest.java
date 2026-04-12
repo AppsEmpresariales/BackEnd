@@ -79,7 +79,7 @@ class FlujoTrabajoServiceTest {
         validFlujoDTO.setDescripcion("Flujo de dos niveles para contratos");
         validFlujoDTO.setOrganizacionNit(validOrganizacionNit);
         validFlujoDTO.setTipoDocumentoId(validTipoDocumentoId);
-        validFlujoDTO.setActivo(true);
+        validFlujoDTO.setActive(true);
     }
 
     // ═══════════════════════════════════════════════════════════════════════════
@@ -108,7 +108,7 @@ class FlujoTrabajoServiceTest {
         assertThat(result).isNotNull();
         assertThat(result.getId()).isEqualTo(validFlujoId);
         assertThat(result.getNombre()).isEqualTo("Flujo Aprobación Contratos");
-        assertThat(result.getActivo()).isTrue();
+        assertThat(result.getActive()).isTrue();
 
         verify(organizacionService, times(1)).getOrganizacionActivaByNit(validOrganizacionNit);
         verify(tipoDocumentoService, times(1))
@@ -281,7 +281,7 @@ class FlujoTrabajoServiceTest {
 
         // ASSERT
         assertThat(result).isNotNull();
-        assertThat(result.getActivo()).isTrue();
+        assertThat(result.getActive()).isTrue();
         assertThat(result.getTipoDocumentoId()).isEqualTo(validTipoDocumentoId);
 
         verify(flujoTrabajoDAO, times(1))
@@ -310,7 +310,7 @@ class FlujoTrabajoServiceTest {
         FlujoTrabajoDTO flujo2 = new FlujoTrabajoDTO();
         flujo2.setId(2L);
         flujo2.setNombre("Flujo Facturas");
-        flujo2.setActivo(true);
+        flujo2.setActive(true);
 
         when(organizacionService.getOrganizacionByNit(validOrganizacionNit))
                 .thenReturn(new OrganizacionDTO());
@@ -363,7 +363,7 @@ class FlujoTrabajoServiceTest {
         flujoActualizado.setId(validFlujoId);
         flujoActualizado.setNombre("Flujo Actualizado");
         flujoActualizado.setDescripcion("Descripción actualizada");
-        flujoActualizado.setActivo(true);
+        flujoActualizado.setActive(true);
 
         when(flujoTrabajoDAO.findById(validFlujoId))
                 .thenReturn(Optional.of(validFlujoDTO));
