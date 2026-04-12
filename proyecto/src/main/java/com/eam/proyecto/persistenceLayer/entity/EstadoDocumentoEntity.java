@@ -1,4 +1,4 @@
-package com.docucloud.persistence.entity;
+package com.eam.proyecto.persistenceLayer.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
