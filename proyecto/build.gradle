@@ -10,7 +10,7 @@ description = 'Demo API backend con Spring Boot'
 
 java {
 	toolchain {
-		languageVersion = JavaLanguageVersion.of(24)
+		languageVersion = JavaLanguageVersion.of(25)
 	}
 }
 
@@ -47,6 +47,8 @@ dependencies {
 	testImplementation 'org.mockito:mockito-junit-jupiter'
 	testImplementation 'org.assertj:assertj-core'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
 }
 
 test {
