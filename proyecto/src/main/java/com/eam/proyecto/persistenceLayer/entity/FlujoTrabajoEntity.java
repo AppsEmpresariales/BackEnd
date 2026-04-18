@@ -23,12 +23,10 @@ public class FlujoTrabajoEntity {
     private Boolean active;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "organization_id")
-    @Column(nullable = false)
+    @JoinColumn(name = "organization_id", nullable = false)
     private OrganizacionEntity organizacion;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "documento_tipo_id")
-    @Column(nullable = false)
+    @JoinColumn(name = "documento_tipo_id", nullable = false)
     private TipoDocumentoEntity tipoDocumento;
 }

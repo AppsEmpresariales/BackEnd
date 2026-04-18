@@ -24,7 +24,6 @@ public class EstadoDocumentoEntity {
     private Boolean esFinal;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "organization_id")
-    @Column(nullable = false)
+    @JoinColumn(name = "organization_id", nullable = false)
     private OrganizacionEntity organizacion;
 }

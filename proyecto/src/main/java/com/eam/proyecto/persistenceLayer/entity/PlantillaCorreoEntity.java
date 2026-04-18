@@ -29,7 +29,6 @@ public class PlantillaCorreoEntity {
     private Boolean activo;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "organization_id")
-    @Column(nullable = false)
+    @JoinColumn(name = "organization_id", nullable = false)
     private OrganizacionEntity organizacion;
 }
