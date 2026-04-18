@@ -13,21 +13,25 @@ public class FlujoTrabajoPasoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String nombre;
     private String descripcion;
 
-    @Column(name = "orden_paso")
+    @Column(name = "orden_paso", nullable = false)
     private Integer ordenPaso;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "flujo_trabajo_id")
+    @Column(nullable = false)
     private FlujoTrabajoEntity flujoTrabajo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rol_requerido_id")
+    @Column(nullable = false)
     private RolEntity rolRequerido;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "objetivo_estado_id") // FK real al catálogo
+    @Column(nullable = false)
     private EstadoDocumentoEntity objetivoEstado;
 }

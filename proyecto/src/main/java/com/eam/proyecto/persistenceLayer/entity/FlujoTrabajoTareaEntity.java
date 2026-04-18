@@ -17,17 +17,21 @@ public class FlujoTrabajoTareaEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "documento_id")
+    @Column(nullable = false)
     private DocumentoEntity documento;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "flujo_trabajo_paso_id")
+    @Column(nullable = false)
     private FlujoTrabajoPasoEntity paso;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "asignado_a")
+    @Column(nullable = false)
     private UsuarioEntity asignadoA;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private EstadoTareaEnum estado;
 
     private String comentario;
@@ -35,7 +39,7 @@ public class FlujoTrabajoTareaEntity {
     @Column(name = "fecha_limite")
     private LocalDateTime fechaLimite;
 
-    @Column(name = "creado_en")
+    @Column(name = "creado_en", nullable = false)
     private LocalDateTime creadoEn;
 
     @Column(name = "completado_en")

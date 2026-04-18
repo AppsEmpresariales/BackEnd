@@ -13,7 +13,9 @@ public class OrganizacionEntity {
     @Id
     private Long nit;
 
+    @Column (nullable = false)
     private String nombre;
+    @Column (nullable = false)
     private String email;
     private String telefono;
 
@@ -26,8 +28,9 @@ public class OrganizacionEntity {
     @Column(name = "dir_comuna")
     private String dirComuna;
 
+    @Column(nullable = false)
     private Boolean active;
 
-    @Column(name = "creado_en")
+    @Column(name = "creado_en", nullable = false)
     private LocalDateTime creadoEn;
 }

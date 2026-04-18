@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
 
-// AuditRegistroEntity — entidad que faltaba
+
 @Entity
 @Table(name = "audit_registros")
 @Data @NoArgsConstructor @AllArgsConstructor
@@ -15,14 +15,16 @@ public class AuditRegistroEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "documento_id")
+    @JoinColumn(name = "documento_id", nullable = false)
     private DocumentoEntity documento;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuario_id")
+    @JoinColumn(name = "usuario_id", nullable = false)
     private UsuarioEntity usuario;
 
+    @Column(nullable = false)
     private String accion;
+
     private String descripcion;
 
     @Column(name = "estado_previo")
@@ -31,6 +33,6 @@ public class AuditRegistroEntity {
     @Column(name = "estado_nuevo")
     private String estadoNuevo;
 
-    @Column(name = "creado_en")
+    @Column(name = "creado_en", nullable = false)
     private LocalDateTime creadoEn;
 }
