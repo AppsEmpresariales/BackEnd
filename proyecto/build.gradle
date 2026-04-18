@@ -2,14 +2,8 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.5.5'
 	id 'io.spring.dependency-management' version '1.1.7'
-	// Herramientas para pruebas
-	// Genera cobertura de pruebas
 	id 'jacoco'
-	// Plugin SonarQube
-	//id "org.sonarqube" version "4.4.1.3373"
-	// Plugin Allure Reports
-	//id "io.qameta.allure" version "2.11.2"
-	id "io.qameta.allure" version "3.0.2" // Para JDK 25
+	id "io.qameta.allure" version "3.0.2"
 }
 
 group = 'com.rafaelperez'
@@ -35,59 +29,65 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.mockito:mockito-core:5.11.0'
 	testImplementation 'org.mockito:mockito-junit-jupiter:5.11.0'
+	testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
 
-	// https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.12")
 
-	// MapStruct para mapeo automático
+	// MapStruct
 	implementation 'org.mapstruct:mapstruct:1.6.3'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.3'
-	// Para usar MapStruct con Lombok
 	annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
-	// tras los test se generan los reportes
-	// con JaCoCo + Allure
 	finalizedBy jacocoTestReport, allureReport
 }
 
 jacoco {
-	toolVersion = "0.8.10"
+	toolVersion = "0.8.14"
 }
 
 jacocoTestReport {
 	dependsOn test
 	reports {
-		xml.required = true   // necesario para SonarQube
-		html.required = true  // reporte navegable local
+		xml.required = true
+		html.required = true
 	}
 	finalizedBy jacocoTestCoverageVerification
 }
 
 jacocoTestCoverageVerification {
+	dependsOn test
 	violationRules {
 		rule {
 			limit {
-				// ejemplo: exige al menos 80% cobertura
 				minimum = 0.30
 			}
 		}
 	}
 }
 
+tasks.named('check') {
+	dependsOn jacocoTestReport
+	dependsOn jacocoTestCoverageVerification
+}
+
+tasks.named('allureReport') {
+	clean = true
+}
+
 allure {
-	//version = "2.24.0"     // versión de Allure Report
-	version = "2.34.0"// Para JDK 25
-	autoconfigure = true   // configura automáticamente JUnit 5 listener
-	aspectjweaver = true   // necesario para anotaciones @Step, @Attachment
+	version = "2.34.0"
+	autoconfigure = true
+	aspectjweaver = true
 }

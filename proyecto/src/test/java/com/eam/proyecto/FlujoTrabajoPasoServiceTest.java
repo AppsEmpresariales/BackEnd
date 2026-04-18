@@ -97,10 +97,10 @@ public class FlujoTrabajoPasoServiceTest {
         validCreateDTO.setDescripcion("Primer paso de revisión");
 
         // DTO de respuesta del DAO tras crear
-        validPasoDTO = mock(FlujoTrabajoPasoDTO.class);
-        when(validPasoDTO.getId()).thenReturn(validPasoId);
-        when(validPasoDTO.getOrdenPaso()).thenReturn(1);
-        when(validPasoDTO.getFlujoTrabajoId()).thenReturn(validFlujoId);
+        validPasoDTO = new FlujoTrabajoPasoDTO();
+        validPasoDTO.setId(validPasoId);
+        validPasoDTO.setOrdenPaso(1);
+        validPasoDTO.setFlujoTrabajoId(validFlujoId);
     }
 
     // ==================== createPaso ====================
