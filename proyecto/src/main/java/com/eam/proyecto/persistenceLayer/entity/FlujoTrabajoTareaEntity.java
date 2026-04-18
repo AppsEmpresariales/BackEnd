@@ -16,18 +16,15 @@ public class FlujoTrabajoTareaEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "documento_id")
-    @Column(nullable = false)
+    @JoinColumn(name = "documento_id", nullable = false)
     private DocumentoEntity documento;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "flujo_trabajo_paso_id")
-    @Column(nullable = false)
+    @JoinColumn(name = "flujo_trabajo_paso_id", nullable = false)
     private FlujoTrabajoPasoEntity paso;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "asignado_a")
-    @Column(nullable = false)
+    @JoinColumn(name = "asignado_a", nullable = false)
     private UsuarioEntity asignadoA;
 
     @Enumerated(EnumType.STRING)
