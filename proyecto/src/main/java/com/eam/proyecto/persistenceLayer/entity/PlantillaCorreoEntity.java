@@ -14,6 +14,7 @@ public class PlantillaCorreoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String nombre;
     private String asunto;
 
@@ -24,9 +25,11 @@ public class PlantillaCorreoEntity {
     @Column(name = "tipo_evento")
     private TipoEventoEnum tipoEvento;
 
+    @Column(nullable = false)
     private Boolean activo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "organization_id")
+    @Column(nullable = false)
     private OrganizacionEntity organizacion;
 }

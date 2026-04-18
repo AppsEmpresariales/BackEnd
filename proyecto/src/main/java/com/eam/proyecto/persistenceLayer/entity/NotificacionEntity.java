@@ -17,6 +17,7 @@ public class NotificacionEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id")
+    @Column(nullable = false)
     private UsuarioEntity usuario;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -28,6 +29,7 @@ public class NotificacionEntity {
     private PlantillaCorreoEntity plantilla;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "canal", nullable = false)
     private CanalNotificacionEnum canal;
 
     @Column(columnDefinition = "TEXT")

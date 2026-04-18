@@ -1,18 +1,14 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '4.0.2'
+	id 'org.springframework.boot' version '3.5.5'
 	id 'io.spring.dependency-management' version '1.1.7'
 	id 'jacoco'
-// Plugin SonarQube
-//id "org.sonarqube" version "4.4.1.3373"
-// Plugin Allure Reports
 	id "io.qameta.allure" version "3.0.2"
-//id "io.qameta.allure" version "3.0.2" // Para JDK 25
 }
 
-group = 'com.eam'
-version = '0.0.1-SNAPSHOT'
-description = 'Demo API backend con Spring Boot'
+group = 'com.rafaelperez'
+version = '1.0.0'
+description = 'Demo project for Spring Boot'
 
 java {
 	toolchain {
@@ -33,40 +29,28 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-validation'
-	implementation 'org.springframework.boot:spring-boot-starter-security'  // ← NUEVO
-	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.6'
-
-	// MapStruct ← NUEVO
-	implementation 'org.mapstruct:mapstruct:1.6.3'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.mysql:mysql-connector-j'
-	runtimeOnly 'org.postgresql:postgresql'
-
-	// ⚠️ El orden importa: Lombok ANTES que MapStruct
 	annotationProcessor 'org.projectlombok:lombok'
-	annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.3'  // ← NUEVO
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.mockito:mockito-core'
-	testImplementation 'org.mockito:mockito-junit-jupiter'
-	testImplementation 'org.assertj:assertj-core'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-
+	testImplementation 'org.mockito:mockito-core:5.11.0'
+	testImplementation 'org.mockito:mockito-junit-jupiter:5.11.0'
 	testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
 
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.12")
 
-	// MapStruct para mapeo automático
+	// MapStruct
 	implementation 'org.mapstruct:mapstruct:1.6.3'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.3'
-	// Para usar MapStruct con Lombok
 	annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+	finalizedBy jacocoTestReport, allureReport
 }
 
 jacoco {
@@ -76,9 +60,10 @@ jacoco {
 jacocoTestReport {
 	dependsOn test
 	reports {
-		xml.required = true   // necesario para SonarQube
-		html.required = true  // reporte navegable local
+		xml.required = true
+		html.required = true
 	}
+	finalizedBy jacocoTestCoverageVerification
 }
 
 jacocoTestCoverageVerification {
@@ -86,7 +71,6 @@ jacocoTestCoverageVerification {
 	violationRules {
 		rule {
 			limit {
-				// ejemplo: exige al menos 80% cobertura
 				minimum = 0.30
 			}
 		}
@@ -103,8 +87,7 @@ tasks.named('allureReport') {
 }
 
 allure {
-	version = "2.34.0"     // versión de Allure Report
-	//version = "2.34.0"// Para JDK 25
-	autoconfigure = true   // configura automáticamente JUnit 5 listener
-	aspectjweaver = true   // necesario para anotaciones @Step, @Attachment
+	version = "2.34.0"
+	autoconfigure = true
+	aspectjweaver = true
 }

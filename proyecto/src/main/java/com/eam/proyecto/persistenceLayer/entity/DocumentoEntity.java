@@ -14,8 +14,10 @@ public class DocumentoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String titulo;
     private String descripcion;
+    @Column(nullable = false)
     private Integer version;
 
     @Column(name = "archivo_nombre")
@@ -29,21 +31,25 @@ public class DocumentoEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "creado_por")
+    @Column(nullable = false)
     private UsuarioEntity creadoPor;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "organization_id")
+    @Column(nullable = false)
     private OrganizacionEntity organizacion;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tipo_documento_id")
+    @Column(nullable = false)
     private TipoDocumentoEntity tipoDocumento;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "estado_documento_id") // FK real, no Enum
+    @Column(nullable = false)
     private EstadoDocumentoEntity estadoDocumento;
 
-    @Column(name = "creado_en")
+    @Column(name = "creado_en", nullable = false)
     private LocalDateTime creadoEn;
 
     @Column(name = "actualizado_en")
