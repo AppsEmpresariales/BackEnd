@@ -100,8 +100,8 @@ public class FlujoTrabajoTareaServiceTest {
         validUsuarioDTO.setNombre("Ana Gómez");
         validUsuarioDTO.setActive(true);
 
-        validPasoDTO = mock(FlujoTrabajoPasoDTO.class);
-        when(validPasoDTO.getId()).thenReturn(validPasoId);
+        validPasoDTO = new FlujoTrabajoPasoDTO();
+        validPasoDTO.setId(validPasoId);
 
         // DTO de creación válido
         validCreateDTO = new FlujoTrabajoTareaCreateDTO();
@@ -111,19 +111,19 @@ public class FlujoTrabajoTareaServiceTest {
         validCreateDTO.setComentario("Asignado para revisión inicial");
 
         // Tarea en estado PENDIENTE (resultado del DAO)
-        tareaPendienteDTO = mock(FlujoTrabajoTareaDTO.class);
-        when(tareaPendienteDTO.getId()).thenReturn(validTareaId);
-        when(tareaPendienteDTO.getEstado()).thenReturn(EstadoTareaEnum.PENDIENTE);
+        tareaPendienteDTO = new FlujoTrabajoTareaDTO();
+        tareaPendienteDTO.setId(validTareaId);
+        tareaPendienteDTO.setEstado(EstadoTareaEnum.PENDIENTE);
 
         // Tarea en estado COMPLETADO (para tests de restricción)
-        tareaCompletadaDTO = mock(FlujoTrabajoTareaDTO.class);
-        when(tareaCompletadaDTO.getId()).thenReturn(2L);
-        when(tareaCompletadaDTO.getEstado()).thenReturn(EstadoTareaEnum.COMPLETADO);
+        tareaCompletadaDTO = new FlujoTrabajoTareaDTO();
+        tareaCompletadaDTO.setId(2L);
+        tareaCompletadaDTO.setEstado(EstadoTareaEnum.COMPLETADO);
 
         // Tarea en estado CANCELADO (para tests de restricción)
-        tareaCanceladaDTO = mock(FlujoTrabajoTareaDTO.class);
-        when(tareaCanceladaDTO.getId()).thenReturn(3L);
-        when(tareaCanceladaDTO.getEstado()).thenReturn(EstadoTareaEnum.CANCELADO);
+        tareaCanceladaDTO = new FlujoTrabajoTareaDTO();
+        tareaCanceladaDTO.setId(3L);
+        tareaCanceladaDTO.setEstado(EstadoTareaEnum.CANCELADO);
     }
 
     // ==================== asignarTarea ====================

@@ -2,6 +2,12 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '4.0.2'
 	id 'io.spring.dependency-management' version '1.1.7'
+	id 'jacoco'
+// Plugin SonarQube
+//id "org.sonarqube" version "4.4.1.3373"
+// Plugin Allure Reports
+	id "io.qameta.allure" version "3.0.2"
+//id "io.qameta.allure" version "3.0.2" // Para JDK 25
 }
 
 group = 'com.eam'
@@ -49,8 +55,56 @@ dependencies {
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
 	testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.12")
+
+	// MapStruct para mapeo automático
+	implementation 'org.mapstruct:mapstruct:1.6.3'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.3'
+	// Para usar MapStruct con Lombok
+	annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
 }
 
-test {
+tasks.named('test') {
 	useJUnitPlatform()
+}
+
+jacoco {
+	toolVersion = "0.8.14"
+}
+
+jacocoTestReport {
+	dependsOn test
+	reports {
+		xml.required = true   // necesario para SonarQube
+		html.required = true  // reporte navegable local
+	}
+}
+
+jacocoTestCoverageVerification {
+	dependsOn test
+	violationRules {
+		rule {
+			limit {
+				// ejemplo: exige al menos 80% cobertura
+				minimum = 0.30
+			}
+		}
+	}
+}
+
+tasks.named('check') {
+	dependsOn jacocoTestReport
+	dependsOn jacocoTestCoverageVerification
+}
+
+tasks.named('allureReport') {
+	clean = true
+}
+
+allure {
+	version = "2.34.0"     // versión de Allure Report
+	//version = "2.34.0"// Para JDK 25
+	autoconfigure = true   // configura automáticamente JUnit 5 listener
+	aspectjweaver = true   // necesario para anotaciones @Step, @Attachment
 }
