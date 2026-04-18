@@ -17,12 +17,10 @@ public class RolUsuarioEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    @Column(nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private UsuarioEntity usuario;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "rol_id")
-    @Column(nullable = false)
+    @JoinColumn(name = "rol_id", nullable = false)
     private RolEntity rol;
 }

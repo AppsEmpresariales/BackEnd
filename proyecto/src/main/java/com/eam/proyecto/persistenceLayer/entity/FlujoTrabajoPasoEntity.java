@@ -21,17 +21,14 @@ public class FlujoTrabajoPasoEntity {
     private Integer ordenPaso;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "flujo_trabajo_id")
-    @Column(nullable = false)
+    @JoinColumn(name = "flujo_trabajo_id", nullable = false)
     private FlujoTrabajoEntity flujoTrabajo;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "rol_requerido_id")
-    @Column(nullable = false)
+    @JoinColumn(name = "rol_requerido_id", nullable = false)
     private RolEntity rolRequerido;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "objetivo_estado_id") // FK real al catálogo
-    @Column(nullable = false)
+    @JoinColumn(name = "objetivo_estado_id", nullable = false) // FK real al catálogo
     private EstadoDocumentoEntity objetivoEstado;
 }

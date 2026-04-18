@@ -21,8 +21,7 @@ public class TipoDocumentoEntity {
     private Boolean active;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "organization_id")
-    @Column(nullable = false)
+    @JoinColumn(name = "organization_id", nullable = false)
     private OrganizacionEntity organizacion;
 
     @Column(name = "creado_en",  nullable = false)
