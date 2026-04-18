@@ -24,7 +24,7 @@ public class UsuarioEntity {
     @Column(nullable = false)
     private Boolean active;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "organization_nit", nullable = false)
     private OrganizacionEntity organizacion;
 
@@ -34,3 +34,4 @@ public class UsuarioEntity {
     @Column(name = "actualizado_en")
     private LocalDateTime actualizadoEn;
 }
+

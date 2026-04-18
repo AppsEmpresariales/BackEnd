@@ -20,7 +20,7 @@ public class FlujoTrabajoEntity {
     private String descripcion;
 
     @Column(nullable = false)
-    private Boolean active;
+    private Boolean activo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "organization_id", nullable = false)

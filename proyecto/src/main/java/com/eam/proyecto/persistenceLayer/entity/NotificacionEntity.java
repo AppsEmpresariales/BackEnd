@@ -16,8 +16,7 @@ public class NotificacionEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuario_id")
-    @Column(nullable = false)
+    @JoinColumn(name = "usuario_id", nullable = false)
     private UsuarioEntity usuario;
 
     @ManyToOne(fetch = FetchType.LAZY)
