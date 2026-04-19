@@ -34,7 +34,7 @@ public class NotificacionEntity {
     @Column(columnDefinition = "TEXT")
     private String mensaje;
 
-    @Column(name = "esta_leida") // era "leido"
+    @Column(name = "esta_leida", nullable = false)
     private Boolean estaLeida;
 
     @Column(name = "enviada_a")

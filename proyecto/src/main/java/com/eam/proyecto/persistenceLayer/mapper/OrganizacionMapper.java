@@ -41,8 +41,6 @@ public interface OrganizacionMapper {
      * - creadoEn: lo gestiona JPA / el service antes de persistir.
      * - active: se establece en true por defecto en el service (US-001 → estado ACTIVO).
      */
-    @Mapping(target = "creadoEn", ignore = true)
-    @Mapping(target = "active", ignore = true)
     OrganizacionEntity toEntity(OrganizacionCreateDTO createDTO);
 
     /**

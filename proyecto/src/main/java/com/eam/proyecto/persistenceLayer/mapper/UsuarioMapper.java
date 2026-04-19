@@ -62,9 +62,7 @@ public interface UsuarioMapper {
      * - creadoEn / actualizadoEn: los gestiona JPA.
      * - active: se establece en true por defecto en el service.
      */
-    @Mapping(target = "creadoEn", ignore = true)
     @Mapping(target = "actualizadoEn", ignore = true)
-    @Mapping(target = "active", ignore = true)
     @Mapping(target = "organizacion", source = "organizacionNit", qualifiedByName = "nitToOrganizacionEntity")
     UsuarioEntity toEntity(UsuarioCreateDTO createDTO);
 
