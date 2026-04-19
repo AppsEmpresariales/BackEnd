@@ -12,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -57,6 +59,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         String passwordHash = passwordEncoder.encode(createDTO.getPassword());
         createDTO.setPasswordHash(passwordHash);
         createDTO.setActive(true);
+        createDTO.setCreadoEn(LocalDateTime.now());
 
         UsuarioDTO result = usuarioDAO.save(createDTO);
 

@@ -3,6 +3,8 @@ package com.eam.proyecto.businessLayer.dto;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 /** US-012 */
 @Data
 public class UsuarioCreateDTO {
@@ -28,4 +30,6 @@ public class UsuarioCreateDTO {
     // Gestionados por el service antes de persistir
     private String passwordHash;
     private Boolean active;
+
+    private LocalDateTime creadoEn;
 }
