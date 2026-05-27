@@ -10,6 +10,7 @@ public interface FlujoTrabajoService {
     FlujoTrabajoDTO createFlujoTrabajo(FlujoTrabajoCreateDTO createDTO);
     FlujoTrabajoDTO getFlujoTrabajoById(Long id);
     FlujoTrabajoDTO getFlujoActivoByOrganizacionAndTipoDocumento(Long organizacionNit, Long tipoDocumentoId);
+    java.util.Optional<FlujoTrabajoDTO> findFlujoActivoByOrganizacionAndTipoDocumento(Long organizacionNit, Long tipoDocumentoId);
     List<FlujoTrabajoDTO> getFlujosActivosByOrganizacion(Long organizacionNit);
     List<FlujoTrabajoDTO> getAllFlujosByOrganizacion(Long organizacionNit);
     FlujoTrabajoDTO updateFlujoTrabajo(Long id, FlujoTrabajoUpdateDTO updateDTO);

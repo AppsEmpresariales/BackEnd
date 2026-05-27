@@ -65,7 +65,7 @@ public class TipoDocumentoController {
             @ApiResponse(responseCode = "400", description = "Datos inválidos o nombre duplicado en el tenant"),
             @ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
-    public ResponseEntity<TipoDocumentoDTO> createTipoDocumento(
+    public ResponseEntity<?> createTipoDocumento(
             @Parameter(description = "Datos del tipo documental a crear", required = true)
             @RequestBody TipoDocumentoCreateDTO createDTO
     ) {
@@ -78,10 +78,10 @@ public class TipoDocumentoController {
             return ResponseEntity.status(HttpStatus.CREATED).body(result);
         } catch (IllegalArgumentException e) {
             log.warn("Error de validación al crear tipo documental: {}", e.getMessage());
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(java.util.Collections.singletonMap("message", e.getMessage()));
         } catch (RuntimeException e) {
             log.error("Error al crear tipo documental: {}", e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(java.util.Collections.singletonMap("message", e.getMessage()));
         }
     }
 
@@ -204,7 +204,7 @@ public class TipoDocumentoController {
             @ApiResponse(responseCode = "400", description = "Datos inválidos"),
             @ApiResponse(responseCode = "404", description = "Tipo documental no encontrado")
     })
-    public ResponseEntity<TipoDocumentoDTO> updateTipoDocumento(
+    public ResponseEntity<?> updateTipoDocumento(
             @Parameter(description = "ID del tipo documental", required = true, example = "1")
             @PathVariable Long id,
             @Parameter(description = "Datos a actualizar", required = true)
@@ -218,7 +218,7 @@ public class TipoDocumentoController {
             return ResponseEntity.ok(result);
         } catch (IllegalArgumentException e) {
             log.warn("Error de validación al actualizar tipo documental ID {}: {}", id, e.getMessage());
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(java.util.Collections.singletonMap("message", e.getMessage()));
         } catch (RuntimeException e) {
             log.warn("Tipo documental no encontrado para actualizar ID: {}", id);
             return ResponseEntity.notFound().build();
@@ -238,7 +238,7 @@ public class TipoDocumentoController {
             @ApiResponse(responseCode = "404", description = "No encontrado"),
             @ApiResponse(responseCode = "409", description = "Ya estaba activo")
     })
-    public ResponseEntity<TipoDocumentoDTO> activarTipoDocumento(
+    public ResponseEntity<?> activarTipoDocumento(
             @Parameter(description = "ID del tipo documental", required = true, example = "1")
             @PathVariable Long id
     ) {
@@ -249,10 +249,10 @@ public class TipoDocumentoController {
             return ResponseEntity.ok(result);
         } catch (IllegalStateException e) {
             log.warn("Conflicto al activar tipo documental ID {}: {}", id, e.getMessage());
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(java.util.Collections.singletonMap("message", e.getMessage()));
         } catch (RuntimeException e) {
             log.warn("Tipo documental no encontrado para activar ID: {}", id);
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(java.util.Collections.singletonMap("message", e.getMessage()));
         }
     }
 
@@ -270,7 +270,7 @@ public class TipoDocumentoController {
             @ApiResponse(responseCode = "404", description = "No encontrado"),
             @ApiResponse(responseCode = "409", description = "Ya estaba inactivo")
     })
-    public ResponseEntity<TipoDocumentoDTO> desactivarTipoDocumento(
+    public ResponseEntity<?> desactivarTipoDocumento(
             @Parameter(description = "ID del tipo documental", required = true, example = "1")
             @PathVariable Long id
     ) {
@@ -281,10 +281,10 @@ public class TipoDocumentoController {
             return ResponseEntity.ok(result);
         } catch (IllegalStateException e) {
             log.warn("Conflicto al desactivar tipo documental ID {}: {}", id, e.getMessage());
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(java.util.Collections.singletonMap("message", e.getMessage()));
         } catch (RuntimeException e) {
             log.warn("Tipo documental no encontrado para desactivar ID: {}", id);
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(java.util.Collections.singletonMap("message", e.getMessage()));
         }
     }
 
@@ -305,7 +305,7 @@ public class TipoDocumentoController {
             @ApiResponse(responseCode = "409", description = "Tiene documentos asociados, usar desactivar"),
             @ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
-    public ResponseEntity<Void> deleteTipoDocumento(
+    public ResponseEntity<?> deleteTipoDocumento(
             @Parameter(description = "ID del tipo documental", required = true, example = "1")
             @PathVariable Long id
     ) {
@@ -317,14 +317,14 @@ public class TipoDocumentoController {
             return ResponseEntity.noContent().build();
         } catch (IllegalStateException e) {
             log.warn("No se puede eliminar tipo documental ID {} con documentos asociados", id);
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(java.util.Collections.singletonMap("message", e.getMessage()));
         } catch (RuntimeException e) {
             if (e.getMessage() != null && e.getMessage().contains("no encontrado")) {
                 log.warn("Tipo documental no encontrado para eliminar ID: {}", id);
-                return ResponseEntity.notFound().build();
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(java.util.Collections.singletonMap("message", e.getMessage()));
             }
             log.error("Error al eliminar tipo documental ID {}: {}", id, e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(java.util.Collections.singletonMap("message", e.getMessage()));
         }
     }
 }

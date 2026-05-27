@@ -26,4 +26,11 @@ public class TipoDocumentoEntity {
 
     @Column(name = "creado_en",  nullable = false)
     private LocalDateTime creadoEn;
+
+    @PrePersist
+    protected void onCreate() {
+        if (this.creadoEn == null) {
+            this.creadoEn = LocalDateTime.now();
+        }
+    }
 }

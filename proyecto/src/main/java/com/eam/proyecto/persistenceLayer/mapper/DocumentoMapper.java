@@ -80,9 +80,9 @@ public interface DocumentoMapper {
      * - version: el service lo inicializa en 1.
      */
     @Mapping(target = "id",             ignore = true)
-    @Mapping(target = "creadoEn",       ignore = true)
-    @Mapping(target = "actualizadoEn",  ignore = true)
-    @Mapping(target = "version",        ignore = true)
+    @Mapping(target = "creadoEn",       source = "creadoEn")
+    @Mapping(target = "actualizadoEn",  source = "actualizadoEn")
+    @Mapping(target = "version",        source = "version")
     @Mapping(target = "creadoPor",      source = "creadoPorCedula",  qualifiedByName = "cedulaToUsuarioEntity")
     @Mapping(target = "organizacion",   source = "organizacionNit",  qualifiedByName = "nitToOrganizacionEntity")
     @Mapping(target = "tipoDocumento",  source = "tipoDocumentoId",  qualifiedByName = "idToTipoDocumentoEntity")

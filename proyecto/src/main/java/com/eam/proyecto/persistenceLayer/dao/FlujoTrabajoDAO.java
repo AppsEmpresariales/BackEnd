@@ -48,6 +48,7 @@ public class FlujoTrabajoDAO {
      */
     public FlujoTrabajoDTO save(FlujoTrabajoCreateDTO createDTO) {
         FlujoTrabajoEntity entity = flujoTrabajoMapper.toEntity(createDTO);
+        entity.setActivo(true);
         return flujoTrabajoMapper.toDTO(flujoTrabajoRepository.save(entity));
     }
 

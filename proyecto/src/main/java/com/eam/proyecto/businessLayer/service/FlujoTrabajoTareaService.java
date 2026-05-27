@@ -16,4 +16,5 @@ public interface FlujoTrabajoTareaService {
     FlujoTrabajoTareaDTO completarTarea(Long id, String comentario);
     FlujoTrabajoTareaDTO cancelarTarea(Long id);
     FlujoTrabajoTareaDTO updateTarea(Long id, FlujoTrabajoTareaUpdateDTO updateDTO);
+    boolean existeTareaPendiente(Long documentoId);
 }

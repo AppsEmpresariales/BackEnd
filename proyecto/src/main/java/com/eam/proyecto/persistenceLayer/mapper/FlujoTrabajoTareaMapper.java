@@ -70,9 +70,7 @@ public interface FlujoTrabajoTareaMapper {
      * - estado: el service lo inicializa en PENDIENTE (US-029).
      */
     @Mapping(target = "id",          ignore = true)
-    @Mapping(target = "creadoEn",    ignore = true)
     @Mapping(target = "completadoEn",ignore = true)
-    @Mapping(target = "estado",      ignore = true)
     @Mapping(target = "documento",   source = "documentoId",    qualifiedByName = "idToDocumentoEntity")
     @Mapping(target = "paso",        source = "pasoId",         qualifiedByName = "idToPasoEntity")
     @Mapping(target = "asignadoA",   source = "asignadoACedula",qualifiedByName = "cedulaToUsuarioEntity")

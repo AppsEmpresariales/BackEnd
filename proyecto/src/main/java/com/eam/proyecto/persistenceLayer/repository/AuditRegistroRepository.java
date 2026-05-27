@@ -41,4 +41,6 @@ public interface AuditRegistroRepository extends JpaRepository<AuditRegistroEnti
             @Param("accion") String accion,
             @Param("desde") LocalDateTime desde,
             @Param("hasta") LocalDateTime hasta);
+
+    void deleteByDocumento(DocumentoEntity documento);
 }

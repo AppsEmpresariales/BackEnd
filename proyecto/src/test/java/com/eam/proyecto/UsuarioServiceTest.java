@@ -6,6 +6,9 @@ import com.eam.proyecto.businessLayer.dto.UsuarioUpdateDTO;
 import com.eam.proyecto.businessLayer.service.OrganizacionService;
 import com.eam.proyecto.businessLayer.service.impl.UsuarioServiceImpl;
 import com.eam.proyecto.persistenceLayer.dao.UsuarioDAO;
+import com.eam.proyecto.persistenceLayer.entity.RolEntity;
+import com.eam.proyecto.persistenceLayer.repository.RolRepository;
+import com.eam.proyecto.persistenceLayer.repository.RolUsuarioRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -46,6 +49,12 @@ public class UsuarioServiceTest {
 
     @Mock
     private BCryptPasswordEncoder passwordEncoder;
+
+    @Mock
+    private RolRepository rolRepository;
+
+    @Mock
+    private RolUsuarioRepository rolUsuarioRepository;
 
     // ─── Clase bajo prueba (SUT) ──────────────────────────────────────────────
     @InjectMocks
@@ -93,6 +102,11 @@ public class UsuarioServiceTest {
         when(usuarioDAO.existsByEmail(validCreateDTO.getEmail())).thenReturn(false);
         when(passwordEncoder.encode(validCreateDTO.getPassword())).thenReturn(hashedPassword);
         when(usuarioDAO.save(any(UsuarioCreateDTO.class))).thenReturn(validUsuarioDTO);
+        RolEntity userRole = new RolEntity();
+        userRole.setId(1L);
+        userRole.setNombre("USER");
+        when(rolRepository.findByNombre("USER")).thenReturn(Optional.of(userRole));
+        when(rolUsuarioRepository.existsByUsuarioAndRol(any(), eq(userRole))).thenReturn(false);
 
         // Act
         UsuarioDTO result = usuarioService.createUsuario(validCreateDTO);
@@ -108,6 +122,7 @@ public class UsuarioServiceTest {
         verify(usuarioDAO, times(1)).existsByEmail(validCreateDTO.getEmail());
         verify(passwordEncoder, times(1)).encode("Secreta123");
         verify(usuarioDAO, times(1)).save(captor.capture());
+        verify(rolUsuarioRepository, times(1)).save(any());
         assertThat(captor.getValue().getPasswordHash()).isEqualTo(hashedPassword);
         assertThat(captor.getValue().getActive()).isTrue();
     }
@@ -154,7 +169,7 @@ public class UsuarioServiceTest {
         // Act & Assert
         assertThatThrownBy(() -> usuarioService.createUsuario(validCreateDTO))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("cédula");
+                .hasMessageContaining("cedula");
 
         verify(organizacionService, never()).getOrganizacionActivaByNit(any());
         verify(usuarioDAO, never()).save(any());
@@ -169,7 +184,7 @@ public class UsuarioServiceTest {
         // Act & Assert
         assertThatThrownBy(() -> usuarioService.createUsuario(validCreateDTO))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("cédula");
+                .hasMessageContaining("cedula");
 
         verify(usuarioDAO, never()).save(any());
     }

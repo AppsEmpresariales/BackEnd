@@ -51,7 +51,6 @@ public interface TipoDocumentoMapper {
      */
     @Mapping(target = "id",          ignore = true)
     @Mapping(target = "creadoEn",    ignore = true)
-    @Mapping(target = "active",      ignore = true)
     @Mapping(target = "organizacion", source = "organizacionNit", qualifiedByName = "nitToOrganizacionEntity")
     TipoDocumentoEntity toEntity(TipoDocumentoCreateDTO createDTO);
 

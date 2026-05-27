@@ -25,7 +25,7 @@ public class NotificacionServiceImpl implements NotificacionService {
 
     private final NotificacionDAO notificacionDAO;
     private final UsuarioService usuarioService;
-    private final DocumentoService documentoService;
+    private final @org.springframework.context.annotation.Lazy DocumentoService documentoService;
     private final PlantillaCorreoService plantillaCorreoService;
 
     /**
