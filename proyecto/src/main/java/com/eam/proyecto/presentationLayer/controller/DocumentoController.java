@@ -1,6 +1,7 @@
 package com.eam.proyecto.presentationLayer.controller;
 
 import com.eam.proyecto.businessLayer.dto.DocumentoCreateDTO;
+import com.eam.proyecto.businessLayer.dto.DocumentoArchivoDTO;
 import com.eam.proyecto.businessLayer.dto.DocumentoDTO;
 import com.eam.proyecto.businessLayer.dto.DocumentoUpdateDTO;
 import com.eam.proyecto.businessLayer.service.DocumentoService;
@@ -13,10 +14,16 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
@@ -100,6 +107,68 @@ public class DocumentoController {
     /**
      * RF21 — Obtener documento por ID (sin restricción de tenant).
      */
+    @PostMapping(value = "/{id}/archivo", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @Operation(
+            summary = "Subir archivo del documento",
+            description = "Asocia un archivo fisico al documento y actualiza sus metadatos de almacenamiento. RF18."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Archivo asociado exitosamente"),
+            @ApiResponse(responseCode = "400", description = "Archivo invalido"),
+            @ApiResponse(responseCode = "404", description = "Documento no encontrado")
+    })
+    public ResponseEntity<DocumentoDTO> subirArchivo(
+            @Parameter(description = "ID del documento", required = true, example = "1")
+            @PathVariable Long id,
+            @Parameter(description = "Archivo a subir", required = true)
+            @RequestParam("file") MultipartFile file
+    ) {
+        log.info("POST /api/v1/documentos/{}/archivo - Subiendo archivo", id);
+
+        try {
+            return ResponseEntity.ok(documentoService.subirArchivo(id, file));
+        } catch (IllegalArgumentException e) {
+            log.warn("Archivo invalido para documento ID {}: {}", id, e.getMessage());
+            return ResponseEntity.badRequest().build();
+        } catch (RuntimeException e) {
+            log.warn("No se pudo asociar archivo al documento ID {}: {}", id, e.getMessage());
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/{id}/archivo")
+    @Operation(
+            summary = "Descargar archivo del documento",
+            description = "Descarga el archivo fisico asociado a un documento. RF23."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Archivo descargado"),
+            @ApiResponse(responseCode = "404", description = "Documento o archivo no encontrado")
+    })
+    public ResponseEntity<Resource> descargarArchivo(
+            @Parameter(description = "ID del documento", required = true, example = "1")
+            @PathVariable Long id
+    ) {
+        log.debug("GET /api/v1/documentos/{}/archivo - Descargando archivo", id);
+
+        try {
+            DocumentoArchivoDTO archivo = documentoService.descargarArchivo(id);
+            String disposition = ContentDisposition.attachment()
+                    .filename(archivo.getFileName(), StandardCharsets.UTF_8)
+                    .build()
+                    .toString();
+
+            return ResponseEntity.ok()
+                    .contentType(MediaType.parseMediaType(archivo.getContentType()))
+                    .contentLength(archivo.getSize())
+                    .header(HttpHeaders.CONTENT_DISPOSITION, disposition)
+                    .body(archivo.getResource());
+        } catch (RuntimeException e) {
+            log.warn("Archivo no disponible para documento ID {}: {}", id, e.getMessage());
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @GetMapping("/{id}")
     @Operation(
             summary = "Obtener documento por ID",

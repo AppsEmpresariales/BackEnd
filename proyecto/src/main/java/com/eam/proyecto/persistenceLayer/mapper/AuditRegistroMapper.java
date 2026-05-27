@@ -57,7 +57,6 @@ public interface AuditRegistroMapper {
      * - creadoEn: el service asigna LocalDateTime.now() antes de persistir.
      */
     @Mapping(target = "id",        ignore = true)
-    @Mapping(target = "creadoEn",  ignore = true)
     @Mapping(target = "documento", source = "documentoId",   qualifiedByName = "idToDocumentoEntity")
     @Mapping(target = "usuario",   source = "usuarioCedula", qualifiedByName = "cedulaToUsuarioEntity")
     AuditRegistroEntity toEntity(AuditRegistroCreateDTO createDTO);

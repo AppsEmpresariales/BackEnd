@@ -65,8 +65,6 @@ public interface NotificacionMapper {
      * - estaLeida: se inicializa en false en el service.
      */
     @Mapping(target = "id",        ignore = true)
-    @Mapping(target = "enviadaA",  ignore = true)
-    @Mapping(target = "estaLeida", ignore = true)
     @Mapping(target = "usuario",   source = "usuarioCedula", qualifiedByName = "cedulaToUsuarioEntity")
     @Mapping(target = "documento", source = "documentoId",   qualifiedByName = "idToDocumentoEntity")
     @Mapping(target = "plantilla", source = "plantillaId",   qualifiedByName = "idToPlantillaEntity")

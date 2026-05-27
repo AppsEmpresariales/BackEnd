@@ -21,7 +21,7 @@ import java.util.List;
 public class FlujoTrabajoTareaServiceImpl implements FlujoTrabajoTareaService {
 
     private final FlujoTrabajoTareaDAO flujoTrabajoTareaDAO;
-    private final DocumentoService documentoService;
+    private final @org.springframework.context.annotation.Lazy DocumentoService documentoService;
     private final UsuarioService usuarioService;
     private final FlujoTrabajoPasoService flujoTrabajoPasoService;
 
@@ -194,6 +194,12 @@ public class FlujoTrabajoTareaServiceImpl implements FlujoTrabajoTareaService {
 
         log.info("Tarea actualizada exitosamente ID: {}", id);
         return result;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public boolean existeTareaPendiente(Long documentoId) {
+        return flujoTrabajoTareaDAO.existeTareaPendienteByDocumentoId(documentoId);
     }
 
     // ─── Validaciones privadas ────────────────────────────────────────────────

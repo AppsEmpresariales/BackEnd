@@ -21,7 +21,7 @@ import java.util.List;
 public class AuditRegistroServiceImpl implements AuditRegistroService {
 
     private final AuditRegistroDAO auditRegistroDAO;
-    private final DocumentoService documentoService;
+    private final @org.springframework.context.annotation.Lazy DocumentoService documentoService;
     private final UsuarioService usuarioService;
 
     /**

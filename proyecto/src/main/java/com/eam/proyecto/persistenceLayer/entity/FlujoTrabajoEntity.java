@@ -3,6 +3,9 @@ package com.eam.proyecto.persistenceLayer.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "flujos_trabajo")
 @Data
@@ -29,4 +32,9 @@ public class FlujoTrabajoEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "documento_tipo_id", nullable = false)
     private TipoDocumentoEntity tipoDocumento;
+
+    @OneToMany(mappedBy = "flujoTrabajo", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private List<FlujoTrabajoPasoEntity> pasos = new ArrayList<>();
 }

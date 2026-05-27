@@ -5,7 +5,7 @@ import com.eam.proyecto.businessLayer.dto.DocumentoDTO;
 import com.eam.proyecto.businessLayer.dto.DocumentoUpdateDTO;
 import com.eam.proyecto.persistenceLayer.mapper.DocumentoMapper;
 import com.eam.proyecto.persistenceLayer.entity.*;
-import com.eam.proyecto.persistenceLayer.repository.DocumentoRepository;
+import com.eam.proyecto.persistenceLayer.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -42,6 +42,9 @@ public class DocumentoDAO {
 
     private final DocumentoRepository documentoRepository;
     private final DocumentoMapper documentoMapper;
+    private final AuditRegistroRepository auditRegistroRepository;
+    private final FlujoTrabajoTareaRepository flujoTrabajoTareaRepository;
+    private final NotificacionRepository notificacionRepository;
 
     /**
      * Crear un nuevo documento con metadatos.
@@ -100,6 +103,27 @@ public class DocumentoDAO {
     }
 
     /**
+     * Actualizar los metadatos del archivo fisico asociado al documento.
+     *
+     * US-018 / US-023: la ruta fisica se persiste para descarga posterior,
+     * mientras el binario se guarda en el filesystem por el service.
+     */
+    public Optional<DocumentoDTO> actualizarArchivo(Long id,
+                                                    String archivoNombre,
+                                                    String archivoRuta,
+                                                    Long tamanioArchivo) {
+        return documentoRepository.findById(id)
+                .map(existing -> {
+                    existing.setArchivoNombre(archivoNombre);
+                    existing.setArchivoRuta(archivoRuta);
+                    existing.setTamanioArchivo(tamanioArchivo);
+                    existing.setVersion(existing.getVersion() == null ? 1 : existing.getVersion() + 1);
+                    existing.setActualizadoEn(LocalDateTime.now());
+                    return documentoMapper.toDTO(documentoRepository.save(existing));
+                });
+    }
+
+    /**
      * Cambiar el estado del documento durante el flujo de trabajo.
      *
      * CASO DE USO ESPECÍFICO: Avanzar pasos del flujo de aprobación.
@@ -126,7 +150,11 @@ public class DocumentoDAO {
      */
     public boolean deleteById(Long id) {
         if (documentoRepository.existsById(id)) {
-            documentoRepository.deleteById(id);
+            DocumentoEntity entity = documentoRepository.getReferenceById(id);
+            flujoTrabajoTareaRepository.deleteByDocumento(entity);
+            notificacionRepository.deleteByDocumento(entity);
+            auditRegistroRepository.deleteByDocumento(entity);
+            documentoRepository.delete(entity);
             return true;
         }
         return false;

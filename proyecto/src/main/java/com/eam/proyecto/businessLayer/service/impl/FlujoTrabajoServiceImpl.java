@@ -87,6 +87,13 @@ public class FlujoTrabajoServiceImpl implements FlujoTrabajoService {
                 });
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public java.util.Optional<FlujoTrabajoDTO> findFlujoActivoByOrganizacionAndTipoDocumento(Long organizacionNit, Long tipoDocumentoId) {
+        log.debug("Buscando opcional de flujo activo para tipo documental {} en organización {}", tipoDocumentoId, organizacionNit);
+        return flujoTrabajoDAO.findActivoByOrganizacionNitAndTipoDocumentoId(organizacionNit, tipoDocumentoId);
+    }
+
     /**
      * READ ACTIVOS — Flujos operativos de la organización — RF28.
      */

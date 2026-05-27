@@ -18,4 +18,7 @@ public class UsuarioDTO {
 
     /** Denormalizado desde organizacion.nombre */
     private String organizacionNombre;
+
+    /** Roles asignados concatenados */
+    private String rolNombre;
 }

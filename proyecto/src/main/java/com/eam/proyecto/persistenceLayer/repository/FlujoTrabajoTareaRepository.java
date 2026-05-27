@@ -44,4 +44,6 @@ public interface FlujoTrabajoTareaRepository extends JpaRepository<FlujoTrabajoT
     List<FlujoTrabajoTareaEntity> findByDocumentoOrderByCreadoEnAsc(DocumentoEntity documento);
 
     Long countByAsignadoAAndEstado(UsuarioEntity usuario, EstadoTareaEnum estado);
+
+    void deleteByDocumento(DocumentoEntity documento);
 }

@@ -38,4 +38,6 @@ public interface NotificacionRepository extends JpaRepository<NotificacionEntity
 
     List<NotificacionEntity> findByUsuarioAndCanalAndEnviadaAIsNull(
             UsuarioEntity usuario, CanalNotificacionEnum canal);
+
+    void deleteByDocumento(DocumentoEntity documento);
 }

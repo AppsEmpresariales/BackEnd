@@ -20,10 +20,10 @@ public class DocumentoEntity {
     @Column(nullable = false)
     private Integer version;
 
-    @Column(name = "archivo_nombre")
+    @Column(name = "archivo_nombre", length = 1024)
     private String archivoNombre;
 
-    @Column(name = "archivo_ruta")
+    @Column(name = "archivo_ruta", length = 1024)
     private String archivoRuta;
 
     @Column(name = "tamanio_archivo")
